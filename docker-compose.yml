@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  minhahorta:
+    image: docker.io/bitnami/mongodb:6.0
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=7y7qg5rpq
+      - MONGODB_DATABASE=minhahorta
