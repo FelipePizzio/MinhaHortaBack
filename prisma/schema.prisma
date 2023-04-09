@@ -16,6 +16,23 @@ model User {
   email         String   @unique
   password_hash String
   created_at    DateTime @default(now())
+  plantations   String[] @default([])
 
   @@map("users")
+}
+
+model Plantation {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  plantId String
+  userId  String
+
+  @@map("plantations")
+}
+
+model Plant {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  @@map("plants")
 }
