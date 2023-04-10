@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String   @unique
+  email         String       @unique
   password_hash String
-  created_at    DateTime @default(now())
-  plantations   String[] @default([])
+  created_at    DateTime     @default(now())
+  Plantation    Plantation[]
 
   @@map("users")
 }
@@ -24,15 +24,18 @@ model User {
 model Plantation {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   name    String
-  plantId String
-  userId  String
+  Plant   Plant  @relation(fields: [plantId], references: [id])
+  plantId String @db.ObjectId
+  User    User   @relation(fields: [userId], references: [id])
+  userId  String @db.ObjectId
 
   @@map("plantations")
 }
 
 model Plant {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  Plantation Plantation[]
 
   @@map("plants")
 }
