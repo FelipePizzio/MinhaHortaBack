@@ -6,6 +6,7 @@ import { authenticate } from './controllers/users/authenticate'
 import { profile } from './controllers/users/profile'
 import { verifyJWT } from './middlewares/verify-jwt'
 import { refresh } from './controllers/users/refresh'
+import { listPlantations } from './controllers/plantations/listPlantations'
 
 export async function appRoutes(app: FastifyInstance) {
   /** User */
@@ -17,6 +18,7 @@ export async function appRoutes(app: FastifyInstance) {
   /** Authenticated */
   app.get('/me', { onRequest: [verifyJWT] }, profile)
   app.post('/plantation', { onRequest: [verifyJWT] }, registerPlantation)
+  app.get('/plantations', { onRequest: [verifyJWT] }, listPlantations)
 
   /** Plant */
   app.post('/plant', registerPlant)
