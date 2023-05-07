@@ -2,7 +2,10 @@ import { makeRegisterService } from '@/services/plantations/factories/make-regis
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function register(request: FastifyRequest, reply: FastifyReply) {
+export async function registerPlantation(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
   const registerBodySchema = z.object({
     name: z.string(),
     plantId: z.string(),

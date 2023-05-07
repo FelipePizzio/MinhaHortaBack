@@ -2,6 +2,10 @@ import { Prisma, Plant } from '@prisma/client'
 import { IPlantsRepository } from '../interfaces/interface-plants-repository'
 
 export class InMemoryPlantsRepository implements IPlantsRepository {
+  findAll(): Promise<[] | Plant[]> {
+    throw new Error('Method not implemented.')
+  }
+
   public items: Plant[] = []
 
   async findById(id: string) {

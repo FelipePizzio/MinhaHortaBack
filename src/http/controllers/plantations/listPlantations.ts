@@ -10,7 +10,6 @@ export async function listPlantations(
   const { plantations } = await getListPlantations.execute({
     userId: request.user.sub,
   })
-
   return reply.status(200).send({
     plantations,
   })
