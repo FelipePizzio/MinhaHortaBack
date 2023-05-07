@@ -3,6 +3,12 @@ import { Prisma } from '@prisma/client'
 import { IPlantsRepository } from '../interfaces/interface-plants-repository'
 
 export class PlantsRepository implements IPlantsRepository {
+  async findAll() {
+    const plants = await prisma.plant.findMany()
+
+    return plants
+  }
+
   async findById(id: string) {
     const plant = await prisma.plant.findUnique({
       where: {

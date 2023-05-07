@@ -7,6 +7,7 @@ import { profile } from './controllers/users/profile'
 import { verifyJWT } from './middlewares/verify-jwt'
 import { refresh } from './controllers/users/refresh'
 import { listPlantations } from './controllers/plantations/listPlantations'
+import { listPlants } from './controllers/plants/listPlants'
 
 export async function appRoutes(app: FastifyInstance) {
   /** User */
@@ -22,4 +23,5 @@ export async function appRoutes(app: FastifyInstance) {
 
   /** Plant */
   app.post('/plant', registerPlant)
+  app.get('/plant', listPlants)
 }

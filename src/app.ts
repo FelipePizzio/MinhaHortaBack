@@ -13,9 +13,6 @@ app.register(fastifyJwt, {
     cookieName: 'refreshToken',
     signed: false,
   },
-  sign: {
-    expiresIn: '10m',
-  },
 })
 
 app.register(fastifyCookie)
@@ -24,6 +21,7 @@ app.register(appRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
+    console.log(error)
     return reply
       .status(400)
       .send({ message: 'Validation error.', issues: error.format() })

@@ -10,7 +10,6 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const { name, plantId } = registerBodySchema.parse(request.body)
-
   const registerService = makeRegisterService()
 
   await registerService.execute({ name, plantId, userId: request.user.sub })
