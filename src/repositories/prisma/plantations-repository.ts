@@ -9,8 +9,6 @@ export class PlantationsRepository implements IPlantationsRepository {
         id
       }
     })
-    console.log("!!!!!!!!!!")
-    console.log(plantation)
     return plantation
   }
   
@@ -26,7 +24,7 @@ export class PlantationsRepository implements IPlantationsRepository {
   }
   
   async findById(id: string) {
-    const plantation = await prisma.plantation.findFirst({
+    const plantation = await prisma.plantation.findUnique({
       where: {
         id
       }

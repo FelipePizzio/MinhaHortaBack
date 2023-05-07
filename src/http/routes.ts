@@ -15,6 +15,7 @@ import { registerPlantation } from './controllers/plantations/registerPlantation
 import { listPlantations } from './controllers/plantations/listPlantations'
 import { updatePlantation } from './controllers/plantations/updatePlantation'
 import { removePlantation } from './controllers/plantations/removePlantation'
+import { getPlantation } from './controllers/plantations/getPlantation'
 
 
 export async function appRoutes(app: FastifyInstance) {
@@ -28,9 +29,10 @@ export async function appRoutes(app: FastifyInstance) {
   app.get('/me', { onRequest: [verifyJWT] }, profile)
   app.post('/me', { onRequest: [verifyJWT] }, updateProfile)
 
-  app.post('/create-plantation', { onRequest: [verifyJWT] }, registerPlantation)
-  app.post('/plantation', { onRequest: [verifyJWT] }, updatePlantation)
+  app.post('/plantation', { onRequest: [verifyJWT] }, registerPlantation)
+  app.put('/plantation', { onRequest: [verifyJWT] }, updatePlantation)
   app.delete('/plantation', { onRequest: [verifyJWT] }, removePlantation)
+  app.get('/plantation/:plantationId', { onRequest: [verifyJWT] }, getPlantation)
 
   app.get('/plantations', { onRequest: [verifyJWT] }, listPlantations)
 

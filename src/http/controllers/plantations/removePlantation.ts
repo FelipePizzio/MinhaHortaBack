@@ -16,5 +16,5 @@ export async function removePlantation(
 
   await removeService.execute({plantationId})
 
-  return reply.status(204).send()
+  return reply.status(200).send()
 }
