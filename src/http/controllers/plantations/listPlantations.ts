@@ -1,4 +1,4 @@
-import { makeGetAllPlantationsService } from '@/services/plantations/factories/make-get-all-plantations'
+import { makeGetAllPlantationsService } from '@/services/plantations/factories/make-get-all-plantations-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function listPlantations(

@@ -13,7 +13,7 @@ interface IRegisterServiceResponse {
   user: User
 }
 
-export class RegisterService {
+export class RegisterUserService {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute({

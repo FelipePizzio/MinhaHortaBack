@@ -1,14 +1,14 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { RegisterService } from '../register'
+import { RegisterPlantService } from '../register-plant'
 import { InMemoryPlantsRepository } from '@/repositories/in-memory-repositories/in-memory-plants-repository'
 
 let plantsRepository: InMemoryPlantsRepository
-let sut: RegisterService
+let sut: RegisterPlantService
 
 describe('Register Service', () => {
   beforeEach(() => {
     plantsRepository = new InMemoryPlantsRepository()
-    sut = new RegisterService(plantsRepository)
+    sut = new RegisterPlantService(plantsRepository)
   })
 
   it('should be able to create', async () => {

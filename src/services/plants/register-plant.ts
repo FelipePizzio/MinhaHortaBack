@@ -9,7 +9,7 @@ interface IRegisterServiceResponse {
   plant: Plant
 }
 
-export class RegisterService {
+export class RegisterPlantService {
   constructor(private plantsRepository: IPlantsRepository) {}
 
   async execute({

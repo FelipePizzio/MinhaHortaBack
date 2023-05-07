@@ -1,4 +1,4 @@
-import { makeRegisterService } from '@/services/plants/factories/make-register-service'
+import { makeRegisterPlantService } from '@/services/plants/factories/make-register-plant-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -12,7 +12,7 @@ export async function registerPlant(
 
   const { name } = registerBodySchema.parse(request.body)
 
-  const registerService = makeRegisterService()
+  const registerService = makeRegisterPlantService()
 
   await registerService.execute({ name })
 
