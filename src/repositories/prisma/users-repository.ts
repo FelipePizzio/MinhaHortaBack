@@ -1,8 +1,19 @@
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
+import { Prisma, User } from '@prisma/client'
 import { IUsersRepository } from '../interfaces/interface-users-repository'
 
 export class UsersRepository implements IUsersRepository {
+  async updateUser(id: string, data: Prisma.UserUpdateInput) {
+    const user = await prisma.user.update({
+      where: {
+        id
+      },
+      data
+    })
+
+    return user
+  }
+
   async findById(id: string) {
     const user = await prisma.user.findUnique({
       where: {

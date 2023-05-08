@@ -27,7 +27,7 @@ export async function appRoutes(app: FastifyInstance) {
 
   /** Authenticated */
   app.get('/me', { onRequest: [verifyJWT] }, profile)
-  app.post('/me', { onRequest: [verifyJWT] }, updateProfile)
+  app.put('/me', { onRequest: [verifyJWT] }, updateProfile)
 
   app.post('/plantation', { onRequest: [verifyJWT] }, registerPlantation)
   app.put('/plantation', { onRequest: [verifyJWT] }, updatePlantation)
