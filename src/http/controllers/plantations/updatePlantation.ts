@@ -1,4 +1,4 @@
-import { makeUpdatePlantationService } from '@/services/plantations/factories/make-update-plantation'
+import { makeUpdatePlantationService } from '@/services/plantations/factories/make-update-plantation-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -7,17 +7,17 @@ export async function updatePlantation(
   reply: FastifyReply,
 ) {
 
-  const registerBodySchema = z.object({
+  const updatePlantationBodySchema = z.object({
     plantationId: z.string(),
     name: z.string(),
     plantId: z.string(),
     image: z.string(),
   })
 
-  const { name, plantId, plantationId, image } = registerBodySchema.parse(request.body)
-  const registerService = makeUpdatePlantationService()
+  const { name, plantId, plantationId, image } = updatePlantationBodySchema.parse(request.body)
+  const updatePlantationService = makeUpdatePlantationService()
 
-  const { plantation } = await registerService.execute({ plantationId, name, plantId, image })
+  const { plantation } = await updatePlantationService.execute({ plantationId, name, plantId, image })
 
   return reply.status(200).send({
     plantation

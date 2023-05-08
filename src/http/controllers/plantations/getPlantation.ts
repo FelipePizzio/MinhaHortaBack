@@ -7,14 +7,14 @@ export async function getPlantation(
   reply: FastifyReply,
 ) {
   
-  const registerBodySchema = z.object({
+  const getPlantationParamsSchema = z.object({
     plantationId: z.string(),
   })
 
-  const { plantationId } = registerBodySchema.parse(request.params)
-  const getPlantation = makeGetPlantationByIdService()
+  const { plantationId } = getPlantationParamsSchema.parse(request.params)
+  const getPlantationService = makeGetPlantationByIdService()
 
-  const { plantation } = await getPlantation.execute({
+  const { plantation } = await getPlantationService.execute({
     plantationId
   })
 

@@ -9,7 +9,7 @@ import { updateProfile } from './controllers/users/updateProfile'
 
 import { registerPlant } from './controllers/plants/registerPlant'
 import { listPlants } from './controllers/plants/listPlants'
-import { listPlantInfo } from './controllers/plants/listPlantInfo'
+import { getPlant } from './controllers/plants/getPlant'
 
 import { registerPlantation } from './controllers/plantations/registerPlantation'
 import { listPlantations } from './controllers/plantations/listPlantations'
@@ -38,7 +38,7 @@ export async function appRoutes(app: FastifyInstance) {
 
   /** Plant */
   app.post('/plant', registerPlant)
-  app.get('/plant', listPlantInfo)
+  app.get('/plant/:plantId', getPlant)
 
   app.get('/plants', listPlants)
 }

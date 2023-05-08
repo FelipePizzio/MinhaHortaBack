@@ -6,9 +6,9 @@ export async function listPlantations(
   reply: FastifyReply,
 ) {
 
-  const getListPlantations = makeGetAllPlantationsService()
+  const getListPlantationsService = makeGetAllPlantationsService()
 
-  const { plantations } = await getListPlantations.execute({
+  const { plantations } = await getListPlantationsService.execute({
     userId: request.user.sub,
   })
 

@@ -7,14 +7,14 @@ export async function removePlantation(
   reply: FastifyReply,
 ) {
 
-  const registerBodySchema = z.object({
+  const removePlantationBodySchema = z.object({
     plantationId: z.string(),
   })
 
-  const { plantationId } = registerBodySchema.parse(request.body)
-  const removeService = makeRemovePlantationService()
+  const { plantationId } = removePlantationBodySchema.parse(request.body)
+  const removePlantationService = makeRemovePlantationService()
 
-  await removeService.execute({plantationId})
+  await removePlantationService.execute({plantationId})
 
   return reply.status(200).send()
 }
