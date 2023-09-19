@@ -1,17 +1,23 @@
 import { prisma } from '@/lib/prisma'
-import { Plantation, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { IPlantationsRepository } from '../interfaces/interface-plantations-repository'
 
 export class PlantationsRepository implements IPlantationsRepository {
-  async removePlantation(id: string) {
-    const plantation = await prisma.plantation.delete({
-      where: {
-        id
-      }
+
+  async create(data: Prisma.PlantationCreateInput) {
+    const plantation = await prisma.plantation.create({
+      data,
     })
+
     return plantation
   }
-  
+
+  async findAll() {
+    const plantations = await prisma.plantation.findMany()
+
+    return plantations
+  }
+
   async updatePlantation(id: string, data: Prisma.PlantationUpdateInput) {
     const plantation = await prisma.plantation.update({
       where: {
@@ -20,6 +26,16 @@ export class PlantationsRepository implements IPlantationsRepository {
       data
     })
 
+    return plantation
+  }
+
+  async removePlantation(id: string) {
+    const plantation = await prisma.plantation.delete({
+      where: {
+        id
+      }
+    })
+    
     return plantation
   }
   
@@ -33,7 +49,7 @@ export class PlantationsRepository implements IPlantationsRepository {
     return plantation
   }
   
-  async findAllByUser(id: string) {
+  async findByUser(id: string) {
     const plantations = await prisma.plantation.findMany({
       where: {
         userId: id,
@@ -41,13 +57,5 @@ export class PlantationsRepository implements IPlantationsRepository {
     })
 
     return plantations
-  }
-
-  async create(data: Prisma.PlantationCreateInput) {
-    const plantation = await prisma.plantation.create({
-      data,
-    })
-
-    return plantation
   }
 }

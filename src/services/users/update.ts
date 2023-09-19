@@ -1,21 +1,20 @@
-import { IPlantationsRepository } from "@/repositories/interfaces/interface-plantations-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found";
-import { Plantation, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import { IUsersRepository } from "@/repositories/interfaces/interface-users-repository";
 import { hash } from "bcryptjs";
 
-interface IUpdateUserProfileServiceRequest {
+interface IUpdateUserServiceRequest {
   userId: string
   name: string
   password: string
   avatar: string
 }
 
-interface IUpdateUserProfileServiceResponse {
+interface IUpdateUserServiceResponse {
   user: User
 }
 
-export class UpdateUserProfileService {
+export class UpdateUserService {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
@@ -23,7 +22,7 @@ export class UpdateUserProfileService {
     name,
     password,
     avatar,
-  }: IUpdateUserProfileServiceRequest): Promise<IUpdateUserProfileServiceResponse> {
+  }: IUpdateUserServiceRequest): Promise<IUpdateUserServiceResponse> {
     const password_hash = await hash(password, 6)
 
     const user = await this.usersRepository.updateUser(userId, {name, avatar, password_hash})

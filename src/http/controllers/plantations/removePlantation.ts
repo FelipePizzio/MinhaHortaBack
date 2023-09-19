@@ -1,4 +1,4 @@
-import { makeRemovePlantationService } from '@/services/plantations/factories/make-remove-plantation-service'
+import { makeRemovePlantationService } from '@/services/plantations/factories/make-remove-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

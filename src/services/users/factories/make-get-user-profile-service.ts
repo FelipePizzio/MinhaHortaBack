@@ -1,5 +1,5 @@
 import { UsersRepository } from '@/repositories/prisma/users-repository'
-import { GetUserProfileService } from '../get-user-profile'
+import { GetUserProfileService } from '../find-by-id'
 
 export function makeGetUserProfileService() {
   const usersRepository = new UsersRepository()

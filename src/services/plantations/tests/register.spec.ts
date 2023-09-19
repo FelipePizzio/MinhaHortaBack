@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { RegisterPlantationService } from '../register-plantation'
+import { RegisterPlantationService } from '../create'
 import { InMemoryUsersRepository } from '@/repositories/in-memory-repositories/in-memory-users-repository'
 import { InMemoryPlantationsRepository } from '@/repositories/in-memory-repositories/in-memory-plantations-repository'
 import { InMemoryPlantsRepository } from '@/repositories/in-memory-repositories/in-memory-plants-repository'

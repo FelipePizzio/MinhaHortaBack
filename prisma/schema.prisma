@@ -33,9 +33,19 @@ model Plantation {
 }
 
 model Plant {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
   image String?
   name  String
+  tasks String[] @default([])
 
   @@map("plants")
+}
+
+model Task {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  plantationId String  @db.ObjectId
+  completed    Boolean @default(false)
+
+  @@map("tasks")
 }

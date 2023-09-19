@@ -1,8 +1,8 @@
-import { makeGetPlantationByIdService } from '@/services/plantations/factories/make-get-plantation-by-id-service'
+import { makeFindByIdPlantationService } from '@/services/plantations/factories/make-find-by-id-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function getPlantation(
+export async function findByIdPlantation(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
@@ -12,7 +12,7 @@ export async function getPlantation(
   })
 
   const { plantationId } = getPlantationParamsSchema.parse(request.params)
-  const getPlantationService = makeGetPlantationByIdService()
+  const getPlantationService = makeFindByIdPlantationService()
 
   const { plantation } = await getPlantationService.execute({
     plantationId

@@ -4,17 +4,17 @@ import { Plantation } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found'
 import { IPlantsRepository } from '@/repositories/interfaces/interface-plants-repository'
 
-interface IRegisterPlantationServiceRequest {
+interface ICreatePlantationServiceRequest {
   name: string
   plantId: string
   userId: string
 }
 
-interface IRegisterPlantationServiceResponse {
+interface ICreatePlantationServiceResponse {
   plantation: Plantation
 }
 
-export class RegisterPlantationService {
+export class CreatePlantationService {
   constructor(
     private plantationRepository: IPlantationsRepository,
     private usersRepository: IUsersRepository,
@@ -25,7 +25,7 @@ export class RegisterPlantationService {
     name,
     plantId,
     userId,
-  }: IRegisterPlantationServiceRequest): Promise<IRegisterPlantationServiceResponse> {
+  }: ICreatePlantationServiceRequest): Promise<ICreatePlantationServiceResponse> {
     const user = await this.usersRepository.findById(userId)
     const plant = await this.plantsRepository.findById(plantId)
 

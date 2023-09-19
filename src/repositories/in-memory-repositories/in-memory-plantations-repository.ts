@@ -2,6 +2,12 @@ import { Plantation, Prisma } from '@prisma/client'
 import { IPlantationsRepository } from '../interfaces/interface-plantations-repository'
 
 export class InMemoryPlantationsRepository implements IPlantationsRepository {
+  findAll(): Promise<[] | Plantation[]> {
+    throw new Error('Method not implemented.')
+  }
+  findByUser(id: string): Promise<[] | Plantation[]> {
+    throw new Error('Method not implemented.')
+  }
   removePlantation(id: string): Promise<Plantation> {
     throw new Error('Method not implemented.')
   }

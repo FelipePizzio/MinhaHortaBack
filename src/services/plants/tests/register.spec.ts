@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { RegisterPlantService } from '../register-plant'
+import { RegisterPlantService } from '../create'
 import { InMemoryPlantsRepository } from '@/repositories/in-memory-repositories/in-memory-plants-repository'
 
 let plantsRepository: InMemoryPlantsRepository

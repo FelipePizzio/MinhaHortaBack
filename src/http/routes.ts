@@ -7,15 +7,15 @@ import { profile } from './controllers/users/profile'
 import { refresh } from './controllers/users/refresh'
 import { updateProfile } from './controllers/users/updateProfile'
 
-import { registerPlant } from './controllers/plants/registerPlant'
-import { listPlants } from './controllers/plants/listPlants'
-import { getPlant } from './controllers/plants/getPlant'
+import { createPlant } from './controllers/plants/createPlant'
+import { findAllPlants } from './controllers/plants/findAllPlants'
+import { findByIdPlant } from './controllers/plants/findByIdPlant'
 
-import { registerPlantation } from './controllers/plantations/registerPlantation'
-import { listPlantations } from './controllers/plantations/listPlantations'
+import { createPlantation } from './controllers/plantations/createPlantation'
+import { findByUserPlantation } from './controllers/plantations/findByUserPlantation'
 import { updatePlantation } from './controllers/plantations/updatePlantation'
 import { removePlantation } from './controllers/plantations/removePlantation'
-import { getPlantation } from './controllers/plantations/getPlantation'
+import { findByIdPlantation } from './controllers/plantations/findByIdPlantation'
 
 
 export async function appRoutes(app: FastifyInstance) {
@@ -29,16 +29,16 @@ export async function appRoutes(app: FastifyInstance) {
   app.get('/me', { onRequest: [verifyJWT] }, profile)
   app.put('/me', { onRequest: [verifyJWT] }, updateProfile)
 
-  app.post('/plantation', { onRequest: [verifyJWT] }, registerPlantation)
+  app.post('/plantation', { onRequest: [verifyJWT] }, createPlantation)
   app.put('/plantation', { onRequest: [verifyJWT] }, updatePlantation)
   app.delete('/plantation', { onRequest: [verifyJWT] }, removePlantation)
-  app.get('/plantation/:plantationId', { onRequest: [verifyJWT] }, getPlantation)
+  app.get('/plantation/:plantationId', { onRequest: [verifyJWT] }, findByIdPlantation)
 
-  app.get('/plantations', { onRequest: [verifyJWT] }, listPlantations)
+  app.get('/plantations', { onRequest: [verifyJWT] }, findByUserPlantation)
 
   /** Plant */
-  app.post('/plant', registerPlant)
-  app.get('/plant/:plantId', getPlant)
+  app.post('/plant', createPlant)
+  app.get('/plant/:plantId', findByIdPlant)
 
-  app.get('/plants', listPlants)
+  app.get('/plants', findAllPlants)
 }

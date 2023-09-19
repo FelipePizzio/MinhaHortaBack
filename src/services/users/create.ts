@@ -3,24 +3,24 @@ import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 import { User } from '@prisma/client'
 import { IUsersRepository } from '@/repositories/interfaces/interface-users-repository'
 
-interface IRegisterServiceRequest {
+interface ICreateServiceRequest {
   name: string
   email: string
   password: string
 }
 
-interface IRegisterServiceResponse {
+interface ICreateServiceResponse {
   user: User
 }
 
-export class RegisterUserService {
+export class CreateUserService {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
     name,
     email,
     password,
-  }: IRegisterServiceRequest): Promise<IRegisterServiceResponse> {
+  }: ICreateServiceRequest): Promise<ICreateServiceResponse> {
     const password_hash = await hash(password, 6)
 
     const userWithSameEmail = await this.usersRepository.findByEmail(email)

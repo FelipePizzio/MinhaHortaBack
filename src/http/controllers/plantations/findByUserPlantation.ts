@@ -1,12 +1,12 @@
-import { makeGetAllPlantationsService } from '@/services/plantations/factories/make-get-all-plantations-service'
+import { makeFindByUserPlantationsService } from '@/services/plantations/factories/make-find-by-user-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-export async function listPlantations(
+export async function findByUserPlantation(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
 
-  const getListPlantationsService = makeGetAllPlantationsService()
+  const getListPlantationsService = makeFindByUserPlantationsService()
 
   const { plantations } = await getListPlantationsService.execute({
     userId: request.user.sub,

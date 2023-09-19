@@ -2,20 +2,20 @@ import { IPlantsRepository } from "@/repositories/interfaces/interface-plants-re
 import { Plant } from "@prisma/client"
 import { ResourceNotFoundError } from "../errors/resource-not-found"
 
-interface IGetPlantByIdServiceRequest {
+interface IFindByIdPlantServiceRequest {
   plantId: string
 }
 
-interface IGetPlantByIdServiceResponse {
+interface IFindByIdPlantServiceResponse {
   plant: Plant
 }
 
-export class GetPlantByIdService {
+export class FindByIdPlantService {
   constructor(private plantRepository: IPlantsRepository) {}
 
   async execute({
     plantId
-  }: IGetPlantByIdServiceRequest): Promise<IGetPlantByIdServiceResponse> {
+  }: IFindByIdPlantServiceRequest): Promise<IFindByIdPlantServiceResponse> {
     const plant = await this.plantRepository.findById(plantId)
 
     if(!plant) {

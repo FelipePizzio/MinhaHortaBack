@@ -2,20 +2,20 @@ import { IUsersRepository } from '@/repositories/interfaces/interface-users-repo
 import { User } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found'
 
-interface IGetUserProfileServiceRequest {
+interface IFindByIdServiceRequest {
   userId: string
 }
 
-interface IGetUserProfileServiceResponse {
+interface IFindByIdServiceResponse {
   user: User
 }
 
-export class GetUserProfileService {
+export class FindByIdService {
   constructor(private userRepository: IUsersRepository) {}
 
   async execute({
     userId,
-  }: IGetUserProfileServiceRequest): Promise<IGetUserProfileServiceResponse> {
+  }: IFindByIdServiceRequest): Promise<IFindByIdServiceResponse> {
     const user = await this.userRepository.findById(userId)
 
     if (!user) {

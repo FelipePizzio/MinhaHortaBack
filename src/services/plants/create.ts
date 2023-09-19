@@ -1,20 +1,20 @@
 import { IPlantsRepository } from '@/repositories/interfaces/interface-plants-repository'
 import { Plant } from '@prisma/client'
 
-interface IRegisterServiceRequest {
+interface ICreateServiceRequest {
   name: string
 }
 
-interface IRegisterServiceResponse {
+interface ICreateServiceResponse {
   plant: Plant
 }
 
-export class RegisterPlantService {
+export class CreatePlantService {
   constructor(private plantsRepository: IPlantsRepository) {}
 
   async execute({
     name,
-  }: IRegisterServiceRequest): Promise<IRegisterServiceResponse> {
+  }: ICreateServiceRequest): Promise<ICreateServiceResponse> {
     const plant = await this.plantsRepository.create({
       name,
     })

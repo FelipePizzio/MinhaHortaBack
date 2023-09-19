@@ -1,4 +1,4 @@
-import { makeUpdatePlantationService } from '@/services/plantations/factories/make-update-plantation-service'
+import { makeUpdatePlantationService } from '@/services/plantations/factories/make-update-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
