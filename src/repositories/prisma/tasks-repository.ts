@@ -38,4 +38,14 @@ export class TasksRepository implements ITasksRepository {
     
     return task
   }
+
+  async findByUser(id: string) {
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId: id
+      }
+    })
+
+    return tasks
+  }
 }

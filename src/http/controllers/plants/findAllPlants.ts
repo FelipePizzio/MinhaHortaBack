@@ -2,9 +2,9 @@ import { makeFindAllPlantsService } from '@/services/plants/factories/make-find-
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function findAllPlants(request: FastifyRequest, reply: FastifyReply) {
-  const getListPlants = makeFindAllPlantsService()
+  const service = makeFindAllPlantsService()
 
-  const { plants } = await getListPlants.execute({})
+  const { plants } = await service.execute({})
 
   return reply.status(200).send({ plants })
 }

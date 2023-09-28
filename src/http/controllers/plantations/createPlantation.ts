@@ -7,16 +7,16 @@ export async function createPlantation(
   reply: FastifyReply,
 ) {
 
-  const registerPlantationBodySchema = z.object({
+  const bodySchema = z.object({
     name: z.string(),
     plantId: z.string(),
     userId: z.string(),
   })
 
-  const { name, plantId } = registerPlantationBodySchema.parse(request.body)
-  const registerPlantationService = makeCreatePlantationService()
+  const { name, plantId } = bodySchema.parse(request.body)
+  const service = makeCreatePlantationService()
 
-  await registerPlantationService.execute({ name, plantId, userId: request.user.sub })
+  await service.execute({ name, plantId, userId: request.user.sub })
 
   return reply.status(201).send()
 }

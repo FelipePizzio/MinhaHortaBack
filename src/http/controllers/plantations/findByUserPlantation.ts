@@ -6,9 +6,9 @@ export async function findByUserPlantation(
   reply: FastifyReply,
 ) {
 
-  const getListPlantationsService = makeFindByUserPlantationsService()
+  const service = makeFindByUserPlantationsService()
 
-  const { plantations } = await getListPlantationsService.execute({
+  const { plantations } = await service.execute({
     userId: request.user.sub,
   })
 

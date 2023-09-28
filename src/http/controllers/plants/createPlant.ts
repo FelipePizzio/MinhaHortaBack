@@ -6,15 +6,15 @@ export async function createPlant(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const registerPlantBodySchema = z.object({
+  const bodySchema = z.object({
     name: z.string(),
   })
 
-  const { name } = registerPlantBodySchema.parse(request.body)
+  const { name } = bodySchema.parse(request.body)
 
-  const registerPlantService = makeCreatePlantService()
+  const service = makeCreatePlantService()
 
-  await registerPlantService.execute({ name })
+  await service.execute({ name })
 
   return reply.status(201).send()
 }

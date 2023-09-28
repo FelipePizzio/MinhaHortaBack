@@ -5,7 +5,9 @@ import { ResourceNotFoundError } from "../errors/resource-not-found"
 interface IUpdateTaskServiceRequest {
   taskId: string
   name: string
+  userId: string
   plantationId: string
+  completed: boolean
 }
 
 interface IUpdateTaskServiceResponse {
@@ -18,9 +20,11 @@ export class UpdateTaskService {
   async execute({
     taskId,
     name,
-    plantationId
+    userId,
+    plantationId,
+    completed
   }: IUpdateTaskServiceRequest): Promise<IUpdateTaskServiceResponse> {
-    const task = await this.tasksRepository.updateTask(taskId, {name, plantationId})
+    const task = await this.tasksRepository.updateTask(taskId, {name, userId, plantationId, completed})
 
     if(!task) {
       throw new ResourceNotFoundError()

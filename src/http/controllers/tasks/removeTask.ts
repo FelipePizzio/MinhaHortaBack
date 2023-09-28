@@ -7,14 +7,14 @@ export async function removeTask(
   reply: FastifyReply,
 ) {
 
-  const removeTaskBodySchema = z.object({
+  const bodySchema = z.object({
     taskId: z.string()
   })
 
-  const { taskId } = removeTaskBodySchema.parse(request.body)
-  const removeTaskService = makeRemoveTaskService()
+  const { taskId } = bodySchema.parse(request.body)
+  const service = makeRemoveTaskService()
 
-  await removeTaskService.execute({taskId})
+  await service.execute({taskId})
 
   return reply.status(200).send()
 }

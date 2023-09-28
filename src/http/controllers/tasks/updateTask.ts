@@ -7,15 +7,18 @@ export async function updateTask(
   reply: FastifyReply,
 ) {
 
-  const updateTaskBodySchema = z.object({
+  const bodySchema = z.object({
     taskId: z.string(),
     name: z.string(),
+    userId: z.string(),
+    plantationId: z.string(),
+    completed: z.boolean()
   })
 
-  const { name, taskId } = updateTaskBodySchema.parse(request.body)
-  const updateTaskService = makeUpdateTaskService()
+  const { name, taskId, userId, plantationId, completed } = bodySchema.parse(request.body)
+  const service = makeUpdateTaskService()
 
-  const { task } = await updateTaskService.execute({ taskId, name })
+  const { task } = await service.execute({ taskId, name, userId, plantationId, completed })
 
   return reply.status(200).send({
     task

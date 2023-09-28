@@ -7,14 +7,14 @@ export async function findByIdPlantation(
   reply: FastifyReply,
 ) {
   
-  const getPlantationParamsSchema = z.object({
+  const paramsSchema = z.object({
     plantationId: z.string(),
   })
 
-  const { plantationId } = getPlantationParamsSchema.parse(request.params)
-  const getPlantationService = makeFindByIdPlantationService()
+  const { plantationId } = paramsSchema.parse(request.params)
+  const service = makeFindByIdPlantationService()
 
-  const { plantation } = await getPlantationService.execute({
+  const { plantation } = await service.execute({
     plantationId
   })
 

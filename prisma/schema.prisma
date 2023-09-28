@@ -45,6 +45,7 @@ model Task {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   plantationId String  @db.ObjectId
+  userId       String  @db.ObjectId
   completed    Boolean @default(false)
 
   @@map("tasks")

@@ -8,14 +8,14 @@ export async function findByIdPlant(
   reply: FastifyReply,
 ) {
 
-  const getPlantParamsSchema = z.object({
+  const paramsSchema = z.object({
     plantId: z.string()
   })
 
-  const { plantId } = getPlantParamsSchema.parse(request.params)
-  const getPlantService = makeFindByIdPlantService()
+  const { plantId } = paramsSchema.parse(request.params)
+  const service = makeFindByIdPlantService()
 
-  const { plant } = await getPlantService.execute({
+  const { plant } = await service.execute({
     plantId
   })
 

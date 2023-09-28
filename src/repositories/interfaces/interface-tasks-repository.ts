@@ -5,4 +5,6 @@ export interface ITasksRepository {
   findAll(): Promise<Task[] | []>
   updateTask(id: string, data: Prisma.TaskUpdateInput): Promise<Task>
   removeTask(id: string): Promise<Task>
+
+  findByUser(id: string): Promise<Task[] | []>
 }

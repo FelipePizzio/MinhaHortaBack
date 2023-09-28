@@ -1,8 +1,8 @@
-import { makeUpdateUserProfileService } from '@/services/users/factories/make-update-user-profile-service'
+import { makeUpdateUserService } from '@/services/users/factories/make-update-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function updateProfile(
+export async function updateUser(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
@@ -15,9 +15,9 @@ export async function updateProfile(
   })
 
   const { userId, name, password, avatar } = updateUserProfileBodySchema.parse(request.body)
-  const updateUserProfileService = makeUpdateUserProfileService()
+  const service = makeUpdateUserService()
 
-  const { user } = await updateUserProfileService.execute({userId, name, password, avatar})
+  const { user } = await service.execute({userId, name, password, avatar})
 
   return reply.status(200).send({
     user

@@ -2,9 +2,11 @@ import { IPlantationsRepository } from "@/repositories/interfaces/interface-plan
 import { ITasksRepository } from "@/repositories/interfaces/interface-tasks-repository"
 import { Task } from "@prisma/client"
 import { ResourceNotFoundError } from "../errors/resource-not-found"
+import { IUsersRepository } from "@/repositories/interfaces/interface-users-repository"
 
 interface ICreateTaskServiceRequest {
   name: string
+  userId: string
   plantationId: string
 }
 
@@ -13,20 +15,27 @@ interface ICreateTaskServiceResponse {
 }
 
 export class CreateTaskService {
-  constructor(private tasksRepository: ITasksRepository, private plantationRepository: IPlantationsRepository) {}
+  constructor(
+    private tasksRepository: ITasksRepository, 
+    private plantationRepository: IPlantationsRepository, 
+    private usersRepository: IUsersRepository
+  ) {}
 
   async execute({
     name,
+    userId,
     plantationId
   }: ICreateTaskServiceRequest): Promise<ICreateTaskServiceResponse> {
     const plantation = await this.plantationRepository.findById(plantationId)
+    const user = await this.usersRepository.findById(userId)
 
-    if(!plantation) {
+    if(!plantation || !user) {
       throw new ResourceNotFoundError()
     }
 
     const task = await this.tasksRepository.create({
       name,
+      userId,
       plantationId
     })
 

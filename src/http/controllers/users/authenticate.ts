@@ -7,17 +7,17 @@ export async function authenticate(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const authenticateBodySchema = z.object({
+  const bodySchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
   })
 
-  const { email, password } = authenticateBodySchema.parse(request.body)
+  const { email, password } = bodySchema.parse(request.body)
 
   try {
-    const authenticateService = makeAuthenticateService()
+    const service = makeAuthenticateService()
 
-    const { user } = await authenticateService.execute({ email, password })
+    const { user } = await service.execute({ email, password })
 
     const token = await reply.jwtSign(
       {},

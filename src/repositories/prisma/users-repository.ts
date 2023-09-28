@@ -59,5 +59,4 @@ export class UsersRepository implements IUsersRepository {
     return user
   }
 
-  
 }
