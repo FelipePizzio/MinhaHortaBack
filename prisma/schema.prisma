@@ -33,20 +33,28 @@ model Plantation {
 }
 
 model Plant {
-  id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  image String?
-  name  String
-  tasks String[] @default([])
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String[]
+  common_name        String
+  scientific_name    String
+  synonyms           String[]
+  image_url          String?
+  family_common_name String
+  genus              String
+  family             String
+  water_frequency    Int
+  tasks              String[] @default(["Regar"])
 
   @@map("plants")
 }
 
 model Task {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
-  plantationId String  @db.ObjectId
-  userId       String  @db.ObjectId
-  completed    Boolean @default(false)
+  plantationId String   @db.ObjectId
+  userId       String   @db.ObjectId
+  completed    Boolean  @default(false)
+  created_at   DateTime
 
   @@map("tasks")
 }

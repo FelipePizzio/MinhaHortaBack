@@ -3,6 +3,9 @@ import { IUsersRepository } from '@/repositories/interfaces/interface-users-repo
 import { Plantation } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found'
 import { IPlantsRepository } from '@/repositories/interfaces/interface-plants-repository'
+import { ITasksRepository } from '@/repositories/interfaces/interface-tasks-repository'
+import axios from 'axios'
+import moment from 'moment'
 
 interface ICreatePlantationServiceRequest {
   name: string
@@ -19,12 +22,13 @@ export class CreatePlantationService {
     private plantationRepository: IPlantationsRepository,
     private usersRepository: IUsersRepository,
     private plantsRepository: IPlantsRepository,
+    private tasksRepository: ITasksRepository,
   ) {}
 
   async execute({
     name,
     plantId,
-    userId,
+    userId
   }: ICreatePlantationServiceRequest): Promise<ICreatePlantationServiceResponse> {
     const user = await this.usersRepository.findById(userId)
     const plant = await this.plantsRepository.findById(plantId)
@@ -37,7 +41,26 @@ export class CreatePlantationService {
       name,
       plantId,
       userId,
+      image: plant.image_url
     })
+
+    const weather = await axios.get(
+      'http://api.hgbrasil.com/weather?key=9d68da9a&user_ip=remote',
+    )
+    const forecast = weather.data.results.forecast
+
+    for(let i = 0; i < forecast.length; i += plant.water_frequency ) {
+      const date = moment()
+      date.add(i, 'days')
+      if(forecast[i].condition != 'rain') {
+        await this.tasksRepository.create({
+          name: plant.tasks[0],
+          userId,
+          plantationId: plantation.id,
+          created_at: date.format()
+        })
+      }
+    }
 
     return { plantation }
   }

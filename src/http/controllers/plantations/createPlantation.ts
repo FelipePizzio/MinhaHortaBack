@@ -10,7 +10,7 @@ export async function createPlantation(
   const bodySchema = z.object({
     name: z.string(),
     plantId: z.string(),
-    userId: z.string(),
+    userId: z.string()
   })
 
   const { name, plantId } = bodySchema.parse(request.body)

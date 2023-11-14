@@ -8,6 +8,7 @@ interface ICreateTaskServiceRequest {
   name: string
   userId: string
   plantationId: string
+  created_at: Date
 }
 
 interface ICreateTaskServiceResponse {
@@ -24,7 +25,8 @@ export class CreateTaskService {
   async execute({
     name,
     userId,
-    plantationId
+    plantationId,
+    created_at
   }: ICreateTaskServiceRequest): Promise<ICreateTaskServiceResponse> {
     const plantation = await this.plantationRepository.findById(plantationId)
     const user = await this.usersRepository.findById(userId)
@@ -36,7 +38,8 @@ export class CreateTaskService {
     const task = await this.tasksRepository.create({
       name,
       userId,
-      plantationId
+      plantationId,
+      created_at,
     })
 
     return { task }
