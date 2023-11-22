@@ -28,6 +28,7 @@ model Plantation {
   image      String?
   plantId    String   @db.ObjectId
   userId     String   @db.ObjectId
+  water      Int
 
   @@map("plantations")
 }

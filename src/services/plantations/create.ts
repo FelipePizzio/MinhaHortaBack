@@ -41,13 +41,15 @@ export class CreatePlantationService {
       name,
       plantId,
       userId,
-      image: plant.image_url
+      image: plant.image_url,
+      water: (Math.floor(Math.random() * 3) + 1) * 100
     })
 
     const weather = await axios.get(
       'http://api.hgbrasil.com/weather?key=9d68da9a&user_ip=remote',
     )
     const forecast = weather.data.results.forecast
+    console.log('forecast', forecast)
 
     for(let i = 0; i < forecast.length; i += plant.water_frequency ) {
       const date = moment()
