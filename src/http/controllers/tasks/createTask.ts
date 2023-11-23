@@ -10,13 +10,14 @@ export async function createTask(
   const bodySchema = z.object({
     name: z.string(),
     plantationId: z.string(),
-    userId: z.string()
+    userId: z.string(),
+    created_at: z.date()
   })
 
-  const { name, plantationId, userId } = bodySchema.parse(request.body)
+  const { name, plantationId, userId, created_at } = bodySchema.parse(request.body)
   const service = makeCreateTaskService()
 
-  await service.execute({name, plantationId, userId})
+  await service.execute({name, plantationId, userId, created_at})
 
   return reply.status(201).send()
 }

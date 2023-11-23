@@ -49,19 +49,17 @@ export class CreatePlantationService {
       'http://api.hgbrasil.com/weather?key=9d68da9a&user_ip=remote',
     )
     const forecast = weather.data.results.forecast
-    console.log('forecast', forecast)
 
     for(let i = 0; i < forecast.length; i += plant.water_frequency ) {
       const date = moment()
       date.add(i, 'days')
-      if(forecast[i].condition != 'rain') {
-        await this.tasksRepository.create({
-          name: plant.tasks[0],
-          userId,
-          plantationId: plantation.id,
-          created_at: date.format()
-        })
-      }
+      
+      await this.tasksRepository.create({
+        name: plant.tasks[0],
+        userId,
+        plantationId: plantation.id,
+        created_at: date.format()
+      })
     }
 
     return { plantation }
