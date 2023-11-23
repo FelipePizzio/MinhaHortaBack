@@ -23,8 +23,7 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: SCP Files
+        
         uses: appleboy/scp-action@v0.0.1
         with:
           host: ${{ secrets.SSH_HOST }}
