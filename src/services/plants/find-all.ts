@@ -2,16 +2,24 @@ import { IPlantsRepository } from '@/repositories/interfaces/interface-plants-re
 import { Plant } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found'
 
-interface IFindAllPlantsServiceRequest {}
+interface IFindAllPlantsServiceRequest {
+  requestedPage: string
+}
 
 interface IFindAllPlantsServiceResponse {
   plants: Plant[]
+  totalPages: number
 }
 
 export class FindAllPlantsService {
   constructor(private plantsRepository: IPlantsRepository) {}
 
-  async execute({}: IFindAllPlantsServiceRequest): Promise<IFindAllPlantsServiceResponse> {
+  async execute({ requestedPage }: IFindAllPlantsServiceRequest): Promise<IFindAllPlantsServiceResponse> {
+    const page = parseInt(requestedPage)
+    const pageSize = 20
+    const startIndex = (page - 1) * pageSize
+    const endIndex = page * pageSize
+    
     const plants = await this.plantsRepository.findAll()
 
     if (!plants) {
@@ -24,6 +32,9 @@ export class FindAllPlantsService {
       return 0
     })
 
-    return { plants }
+    const paginatedPlants = plants.slice(startIndex, endIndex)
+    const totalPages = Math.ceil(plants.length / pageSize)
+
+    return { plants:paginatedPlants, totalPages }
   }
 }

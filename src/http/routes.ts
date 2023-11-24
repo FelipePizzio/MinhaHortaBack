@@ -52,5 +52,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.post('/plant', createPlant)
   app.get('/plant/:plantId', findByIdPlant)
 
-  app.get('/plants', findAllPlants)
+  app.get('/plants/:requestedPage', findAllPlants)
 }
