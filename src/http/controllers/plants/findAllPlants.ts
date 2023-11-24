@@ -13,7 +13,7 @@ export async function findAllPlants(request: FastifyRequest, reply: FastifyReply
   
   const service = makeFindAllPlantsService()
 
-  const { plants, totalPages } = await service.execute({ requestedPage })
+  const { plants, totalPages, totalResults } = await service.execute({ requestedPage })
 
-  return reply.status(200).send({ plants, totalPages })
+  return reply.status(200).send({ plants, totalPages, totalResults })
 }
