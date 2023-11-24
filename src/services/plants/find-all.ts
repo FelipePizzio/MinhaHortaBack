@@ -8,8 +8,8 @@ interface IFindAllPlantsServiceRequest {
 
 interface IFindAllPlantsServiceResponse {
   plants: Plant[]
-  totalPages: number
-  totalResults: number
+  totalPages?: number
+  totalResults?: number
 }
 
 export class FindAllPlantsService {
@@ -32,6 +32,8 @@ export class FindAllPlantsService {
       if(a.name > b.name) return 1
       return 0
     })
+
+    if(page === 0) return { plants }
 
     const paginatedPlants = plants.slice(startIndex, endIndex)
     const totalPages = Math.ceil(plants.length / pageSize)

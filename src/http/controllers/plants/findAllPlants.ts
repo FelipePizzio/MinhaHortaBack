@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export async function findAllPlants(request: FastifyRequest, reply: FastifyReply) {
   const paramsSchema = z.object({
-    requestedPage: z.string()
+    requestedPage: z.string().default('0')
   })
 
   const {
