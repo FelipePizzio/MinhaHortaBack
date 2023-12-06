@@ -1,6 +1,7 @@
 {
   "extends": [
-    "@rocketseat/eslint-config/node"
+    "@rocketseat/eslint-config/node",
+    "plugin:import/typescript"
   ],
   "rules": {
     "camelcase": "off",
@@ -11,6 +12,24 @@
         "endOfLine": "auto",
         "trailingComma": false
       }
+    ],
+    "no-duplicate-imports": [
+      "error", 
+      {
+        "considerQueryString": true
+      }
     ]
+  },
+  "plugins": ["import"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "tsconfig.json"
+      }
+    }
   }
 }

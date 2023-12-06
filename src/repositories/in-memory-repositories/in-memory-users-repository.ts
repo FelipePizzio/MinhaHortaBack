@@ -3,6 +3,18 @@ import { IUsersRepository } from '../interfaces/interface-users-repository'
 
 export class InMemoryUsersRepository implements IUsersRepository {
   public items: User[] = []
+  
+  findAll(): Promise<User[] | []> {
+    throw new Error('Method not implemented.')
+  }
+
+  updateUser(id: string, data: Prisma.UserUpdateInput): Promise<User> {
+    throw new Error('Method not implemented.')
+  }
+
+  removeUser(id: string): Promise<User> {
+    throw new Error('Method not implemented.')
+  }
 
   async findById(id: string) {
     const user = this.items.find((item) => item.id === id)
@@ -27,7 +39,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
       email: data.email,
       password_hash: data.password_hash,
       created_at: new Date(),
-      avatar: ''
+      avatar: '',
     }
 
     this.items.push(user)

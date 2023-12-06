@@ -2,6 +2,8 @@ import { Plantation, Prisma } from '@prisma/client'
 import { IPlantationsRepository } from '../interfaces/interface-plantations-repository'
 
 export class InMemoryPlantationsRepository implements IPlantationsRepository {
+  public items: Plantation[] = []
+
   findAll(): Promise<[] | Plantation[]> {
     throw new Error('Method not implemented.')
   }
@@ -11,16 +13,21 @@ export class InMemoryPlantationsRepository implements IPlantationsRepository {
   removePlantation(id: string): Promise<Plantation> {
     throw new Error('Method not implemented.')
   }
-  updatePlantation(id: string, data: Prisma.PlantationUpdateInput): Promise<Plantation> {
+
+  updatePlantation(
+    id: string,
+    data: Prisma.PlantationUpdateInput,
+  ): Promise<Plantation> {
     throw new Error('Method not implemented.')
   }
+
   findById(id: string): Promise<Plantation | null> {
     throw new Error('Method not implemented.')
   }
+
   findAllByUser(id: string): Promise<Plantation[] | []> {
     throw new Error('Method not implemented.')
   }
-  public items: Plantation[] = []
 
   async create(data: Prisma.PlantationCreateInput) {
     const plantation = {
@@ -30,6 +37,7 @@ export class InMemoryPlantationsRepository implements IPlantationsRepository {
       image: '',
       plantId: data.plantId,
       userId: data.userId,
+      water: 1,
     }
 
     this.items.push(plantation)

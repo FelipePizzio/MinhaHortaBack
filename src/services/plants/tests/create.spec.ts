@@ -13,7 +13,15 @@ describe('Register Service', () => {
 
   it('should be able to create', async () => {
     const { plant } = await sut.execute({
-      name: 'Alface',
+      name: ['plant-1'],
+      common_name: 'plant-1',
+      scientific_name: 'plant-1',
+      synonyms: ['plant-1'],
+      image_url: '',
+      family_common_name: 'plant-1',
+      genus: 'plant-1',
+      family: 'plant-1',
+      water_frequency: 1,
     })
 
     expect(plant.id).toEqual(expect.any(String))
